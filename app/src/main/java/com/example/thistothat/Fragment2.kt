@@ -1,6 +1,7 @@
 package com.example.thistothat
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.PopupWindow
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -15,6 +17,7 @@ import androidx.fragment.app.Fragment
 import java.io.InputStream
 import java.io.OutputStream
 
+private var popupWindow: PopupWindow? = null
 private var relativeLayouts = mutableListOf<RelativeLayout>()
 private var values_matrix = mutableListOf<MutableList<String>>()
 
@@ -76,6 +79,12 @@ class Fragment2 : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        popupWindow?.dismiss()
+        popupWindow = null
+    }
+
     fun starButtonInteraction(starButton: ImageButton){
         when(values_matrix[starButton.id][1].toInt()){
             // favorited
@@ -97,7 +106,17 @@ class Fragment2 : Fragment() {
     }
 
     fun textButtonInteruction(textButton: Button){
+        val inflater = LayoutInflater.from(requireContext())
+        val popupView = inflater.inflate(R.layout.popup_layout, null)
 
+        // Access values_matrix here and update the pop-up window content accordingly
+
+        // Create the PopupWindow with your custom layout
+        popupWindow = PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true)
+
+        // Set up any interactions or listeners for the pop-up window's views
+
+        // Show the pop-up window at a specific location relative to the textButton
+        popupWindow?.showAsDropDown(textButton)
     }
-    //@SuppressLint("InflateParams")
 }
