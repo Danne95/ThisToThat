@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import java.io.InputStream
 import java.io.OutputStream
+import java.lang.NumberFormatException
 
 private var popupWindow: PopupWindow? = null
 private var relativeLayouts = mutableListOf<RelativeLayout>()
@@ -62,7 +63,7 @@ class Fragment2 : Fragment() {
             }
             textButton.setOnClickListener{
                 Toast.makeText(requireContext(), "You clicked me, text ID: ${textButton.id}", Toast.LENGTH_SHORT).show()
-                textButtonInteruction(textButton)
+                textButtonInteraction(textButton)
             }
         }
     }
@@ -109,7 +110,7 @@ class Fragment2 : Fragment() {
 
     }
 
-    fun textButtonInteruction(textButton: Button){
+    fun textButtonInteraction(textButton: Button){
         val inflater = LayoutInflater.from(requireContext())
         val popupView = inflater.inflate(R.layout.popup_layout, null)
 
@@ -142,15 +143,23 @@ class Fragment2 : Fragment() {
 
         // Set up any interactions or listeners
         firstConversionButton.setOnClickListener{
-            Toast.makeText(requireContext(), "Converting a2b..", Toast.LENGTH_SHORT).show()
-            val calc1 = firstConversionInput.text.toString().toFloat() * values_matrix[textButton.id][4].toFloat()
-            firstConversionOutput.text = calc1.toString()
+            try {
+                val inputText = firstConversionInput.text.toString()
+                val inputVal = inputText.toFloat() * values_matrix[textButton.id][4].toFloat()
+                firstConversionOutput.text = inputVal.toString()
+            }catch (e: NumberFormatException){
+                Toast.makeText(requireContext(), "Please input a number!", Toast.LENGTH_SHORT).show()
+            }
         }
 
         secondConversionButton.setOnClickListener{
-            Toast.makeText(requireContext(), "Converting b2a..", Toast.LENGTH_SHORT).show()
-            val calc2 = secondConversionInput.text.toString().toFloat() * values_matrix[textButton.id][5].toFloat()
-            secondConversionOutput.text = calc2.toString()
+            try {
+                val inputText = secondConversionInput.text.toString()
+                val inputVal = inputText.toFloat() * values_matrix[textButton.id][4].toFloat()
+                secondConversionOutput.text = inputVal.toString()
+            }catch (e: NumberFormatException){
+                Toast.makeText(requireContext(), "Please input a number!", Toast.LENGTH_SHORT).show()
+            }
         }
 
         // Show the pop-up window at a specific location relative to the textButton
