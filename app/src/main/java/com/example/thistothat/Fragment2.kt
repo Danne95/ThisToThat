@@ -1,9 +1,6 @@
 package com.example.thistothat
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +15,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import java.io.InputStream
-import java.io.OutputStream
 import java.lang.NumberFormatException
 
 private var popupWindow: PopupWindow? = null
@@ -155,7 +151,7 @@ class Fragment2 : Fragment() {
         secondConversionButton.setOnClickListener{
             try {
                 val inputText = secondConversionInput.text.toString()
-                val inputVal = inputText.toFloat() * values_matrix[textButton.id][4].toFloat()
+                val inputVal = inputText.toFloat() * values_matrix[textButton.id][5].toFloat()
                 secondConversionOutput.text = inputVal.toString()
             }catch (e: NumberFormatException){
                 Toast.makeText(requireContext(), "Please input a number!", Toast.LENGTH_SHORT).show()
