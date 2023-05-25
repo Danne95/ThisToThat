@@ -3,14 +3,17 @@ package com.example.thistothat
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.RelativeLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -79,6 +82,7 @@ class Fragment2 : Fragment() {
         }
     }
 
+    // handles popup window exit
     override fun onDestroyView() {
         super.onDestroyView()
         popupWindow?.dismiss()
@@ -109,14 +113,48 @@ class Fragment2 : Fragment() {
         val inflater = LayoutInflater.from(requireContext())
         val popupView = inflater.inflate(R.layout.popup_layout, null)
 
-        // Access values_matrix here and update the pop-up window content accordingly
+        // get all views
+        val firstConversionTitle = popupView.findViewById<TextView>(R.id.convertTitle1_1)
+        val firstConversionRatio = popupView.findViewById<TextView>(R.id.convertTitle1_2)
+        val firstConversionInput = popupView.findViewById<EditText>(R.id.convertInput1)
+        val firstConversionButton = popupView.findViewById<ImageButton>(R.id.convertButton1)
+        val firstConversionOutput = popupView.findViewById<TextView>(R.id.convertOutput1)
 
-        // Create the PopupWindow with your custom layout
+        val secondConversionTitle = popupView.findViewById<TextView>(R.id.convertTitle2_1)
+        val secondConversionRatio = popupView.findViewById<TextView>(R.id.convertTitle2_2)
+        val secondConversionInput = popupView.findViewById<EditText>(R.id.convertInput2)
+        val secondConversionButton = popupView.findViewById<ImageButton>(R.id.convertButton2)
+        val secondConversionOutput = popupView.findViewById<TextView>(R.id.convertOutput2)
+
+        // set widget values from values_matrix
+        var temp = values_matrix[textButton.id][2] + " --> " + values_matrix[textButton.id][3]
+        firstConversionTitle.text = temp
+        temp = "1 --> " + values_matrix[textButton.id][4]
+        firstConversionRatio.text = temp
+
+        temp = values_matrix[textButton.id][3] + " --> " + values_matrix[textButton.id][2]
+        secondConversionTitle.text = temp
+        temp = "1 --> " + values_matrix[textButton.id][5]
+        secondConversionRatio.text = temp
+
+        // Create the PopupWindow
         popupWindow = PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true)
 
-        // Set up any interactions or listeners for the pop-up window's views
+        // Set up any interactions or listeners
+        firstConversionButton.setOnClickListener{
+            Toast.makeText(requireContext(), "Converting a2b..", Toast.LENGTH_SHORT).show()
+            val calc1 = firstConversionInput.text.toString().toFloat() * values_matrix[textButton.id][4].toFloat()
+            firstConversionOutput.text = calc1.toString()
+        }
+
+        secondConversionButton.setOnClickListener{
+            Toast.makeText(requireContext(), "Converting b2a..", Toast.LENGTH_SHORT).show()
+            val calc2 = secondConversionInput.text.toString().toFloat() * values_matrix[textButton.id][5].toFloat()
+            secondConversionOutput.text = calc2.toString()
+        }
 
         // Show the pop-up window at a specific location relative to the textButton
         popupWindow?.showAsDropDown(textButton)
     }
+
 }
