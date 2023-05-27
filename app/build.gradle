@@ -8,7 +8,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId 'com.fromepicbrain.thistothat'
+        applicationId 'fromepicbrain.thistothat'
         minSdk 24
         targetSdk 33
         versionCode 1

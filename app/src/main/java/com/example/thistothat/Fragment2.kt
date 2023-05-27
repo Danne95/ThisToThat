@@ -39,6 +39,10 @@ class Fragment2 : Fragment() {
             starButton.id = fields[1].toInt()
             textButton.id = fields[1].toInt()
 
+            // Remove the view from its current parent, if any
+            val parentViewGroup = relativeLayout.parent as? ViewGroup
+            parentViewGroup?.removeView(relativeLayout)
+
             // Add the newly created RelativeLayout object to the relativeLayouts list
             relativeLayouts.add(relativeLayout)
             values_matrix.add(fields)
