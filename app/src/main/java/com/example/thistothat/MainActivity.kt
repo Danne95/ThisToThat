@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
 
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             when (position){
-                0 -> tab.text = "Favorites"
-                1 -> tab.text = "All"
+                0 -> tab.text = "All"
+                1 -> tab.text = "Favorites"
                 else -> throw IllegalArgumentException("Invalid position CODE: 001")
             }
         }.attach()

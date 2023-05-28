@@ -9,8 +9,8 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapte
 
     @NonNull
     override fun createFragment(position: Int): Fragment = when (position){
-            0 -> Fragment1()
-            1 -> Fragment2()
+            0 -> Fragment2()
+            1 -> Fragment1()
             else -> throw IllegalArgumentException("Invalid position CODE: 002")
         }
 

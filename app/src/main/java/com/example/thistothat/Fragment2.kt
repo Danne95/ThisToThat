@@ -29,41 +29,64 @@ class Fragment2 : Fragment() {
         val inflater = LayoutInflater.from(context)
         val parentLayout = view?.findViewById<LinearLayout>(R.id.frag2_linearLayout)
 
-        lines.forEach {line ->
-            val fields = line.split(",").toMutableList()
-            val relativeLayout = inflater.inflate(R.layout.list_item_template, null) as RelativeLayout
-            val starButton = relativeLayout.findViewById<ImageButton>(R.id.template1_imageButton)
-            val textButton = relativeLayout.findViewById<Button>(R.id.template1_button)
+        lines.forEachIndexed {index, line ->
+            if(index > 0) {
+                val fields = line.split(",").toMutableList()
+                val relativeLayout =
+                    inflater.inflate(R.layout.list_item_template, null) as RelativeLayout
+                val starButton =
+                    relativeLayout.findViewById<ImageButton>(R.id.template1_imageButton)
+                val textButton = relativeLayout.findViewById<Button>(R.id.template1_button)
 
-            relativeLayout.id = fields[1].toInt()
-            starButton.id = fields[1].toInt()
-            textButton.id = fields[1].toInt()
+                relativeLayout.id = fields[1].toInt()
+                starButton.id = fields[1].toInt()
+                textButton.id = fields[1].toInt()
 
-            // Remove the view from its current parent, if any
-            val parentViewGroup = relativeLayout.parent as? ViewGroup
-            parentViewGroup?.removeView(relativeLayout)
+                // Remove the view from its current parent, if any
+                val parentViewGroup = relativeLayout.parent as? ViewGroup
+                parentViewGroup?.removeView(relativeLayout)
 
-            // Add the newly created RelativeLayout object to the relativeLayouts list
-            relativeLayouts.add(relativeLayout)
-            values_matrix.add(fields)
-            parentLayout?.addView(relativeLayout)
+                // Add the newly created RelativeLayout object to the relativeLayouts list
+                relativeLayouts.add(relativeLayout)
+                values_matrix.add(fields)
+                parentLayout?.addView(relativeLayout)
 
-            // set buttons from values file
-            when(fields[0].toInt()){
-                1 -> starButton.setImageDrawable(ContextCompat.getDrawable(requireContext(),android.R.drawable.btn_star_big_on))
-                else -> starButton.setImageDrawable(ContextCompat.getDrawable(requireContext(),android.R.drawable.btn_star_big_off))
-            }
-            val title = fields[2] + " to " + fields[3]
-            textButton.text = title
+                // set buttons from values file
+                when (fields[0].toInt()) {
+                    1 -> starButton.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            android.R.drawable.btn_star_big_on
+                        )
+                    )
 
-            // set listeners
-            starButton.setOnClickListener{
-                Toast.makeText(requireContext(), "You clicked me, star ID: ${starButton.id}", Toast.LENGTH_SHORT).show()
-                starButtonInteraction(starButton)
-            }
-            textButton.setOnClickListener{
-                Toast.makeText(requireContext(), "You clicked me, text ID: ${textButton.id}", Toast.LENGTH_SHORT).show()
-                textButtonInteraction(textButton)
+                    else -> starButton.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            android.R.drawable.btn_star_big_off
+                        )
+                    )
+                }
+                val title = fields[2] + " to " + fields[3]
+                textButton.text = title
+
+                // set listeners
+                starButton.setOnClickListener {
+                    Toast.makeText(
+                        requireContext(),
+                        "You clicked me, star ID: ${starButton.id}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    starButtonInteraction(starButton)
+                }
+                textButton.setOnClickListener {
+                    Toast.makeText(
+                        requireContext(),
+                        "You clicked me, text ID: ${textButton.id}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    textButtonInteraction(textButton)
+                }
             }
         }
     }
@@ -127,7 +150,7 @@ class Fragment2 : Fragment() {
         val secondConversionButton = popupView.findViewById<ImageButton>(R.id.convertButton2)
         val secondConversionOutput = popupView.findViewById<TextView>(R.id.convertOutput2)
 
-        // set widget values from values_matrix
+        // set widget titles from values_matrix
         var temp = values_matrix[textButton.id][2] + " --> " + values_matrix[textButton.id][3]
         firstConversionTitle.text = temp
         temp = "1 --> " + values_matrix[textButton.id][4]

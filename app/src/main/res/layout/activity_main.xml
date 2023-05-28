@@ -30,9 +30,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/goblin_one"
-                android:text="hello"
+                android:text="@string/hello_world"
                 android:textAlignment="viewStart"
-                android:textColor="#000000"
+                android:textColor="@android:color/black"
                 app:autoSizeTextType="uniform" />
 
         </androidx.appcompat.widget.Toolbar>
