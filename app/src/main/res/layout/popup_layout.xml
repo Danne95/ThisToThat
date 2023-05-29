@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
         <TextView
             android:id="@+id/convertTitle1_1"
@@ -37,23 +38,27 @@
                 android:id="@+id/convertInput1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="4"
                 android:ems="10"
                 android:inputType="numberDecimal"
-                android:autofillHints="" />
+                android:autofillHints=""
+                android:contentDescription="@string/input_conversion_here"
+                tools:ignore="NestedWeights" />
 
             <ImageButton
                 android:id="@+id/convertButton1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:rotation="180"
-                android:src="?attr/actionModeCloseDrawable" />
+                android:src="?attr/actionModeCloseDrawable"
+                android:contentDescription="@string/click_me" />
 
             <TextView
                 android:id="@+id/convertOutput1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="4" />
 
         </LinearLayout>
 
@@ -82,23 +87,25 @@
                 android:id="@+id/convertInput2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="4"
                 android:ems="10"
                 android:inputType="numberDecimal"
-                android:autofillHints="" />
+                android:autofillHints=""
+                android:contentDescription="@string/input_conversion_here" />
 
             <ImageButton
                 android:id="@+id/convertButton2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:rotation="180"
-                android:src="?attr/actionModeCloseDrawable" />
+                android:src="?attr/actionModeCloseDrawable"
+                android:layout_weight="1"/>
 
             <TextView
                 android:id="@+id/convertOutput2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="4" />
 
         </LinearLayout>
 

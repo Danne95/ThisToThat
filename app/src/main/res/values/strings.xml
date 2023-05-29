@@ -8,4 +8,8 @@
     <string name="hi">Hi</string>
     <string name="star">star</string>
     <string name="conversion_button">conversion button</string>
+    <string name="input2">input2</string>
+    <string name="input1">input1</string>
+    <string name="input_conversion_here" />
+    <string name="click_me">click me</string>
 </resources>
