@@ -1,9 +1,14 @@
 package com.example.thistothat
 
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -12,6 +17,7 @@ import android.widget.PopupWindow
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import java.io.InputStream
@@ -150,43 +156,196 @@ class Fragment2 : Fragment() {
         val secondConversionButton = popupView.findViewById<ImageButton>(R.id.convertButton2)
         val secondConversionOutput = popupView.findViewById<TextView>(R.id.convertOutput2)
 
-        // set widget titles from values_matrix
-        var temp = values_matrix[textButton.id][2] + " --> " + values_matrix[textButton.id][3]
-        firstConversionTitle.text = temp
-        temp = "1 --> " + values_matrix[textButton.id][4]
-        firstConversionRatio.text = temp
+        when(textButton.id) {
+            // Celsius,Fahrenheit
+            28 -> {
+                // set widget titles from values_matrix
+                var temp =
+                    values_matrix[textButton.id][2] + " --> " + values_matrix[textButton.id][3]
+                firstConversionTitle.text = temp
+                temp = " (x * 9/5) + 32 "
+                firstConversionRatio.text = temp
 
-        temp = values_matrix[textButton.id][3] + " --> " + values_matrix[textButton.id][2]
-        secondConversionTitle.text = temp
-        temp = "1 --> " + values_matrix[textButton.id][5]
-        secondConversionRatio.text = temp
+                temp = values_matrix[textButton.id][3] + " --> " + values_matrix[textButton.id][2]
+                secondConversionTitle.text = temp
+                temp = " (x - 32) * 5/9 "
+                secondConversionRatio.text = temp
 
+                // Set up any interactions or listeners
+                firstConversionButton.setOnClickListener {
+                    try {
+                        val inputText = firstConversionInput.text.toString()
+                        val inputVal =
+                            (inputText.toFloat() * 9 / 5) + 32
+                    } catch (e: NumberFormatException) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Please input a number!",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
+
+                secondConversionButton.setOnClickListener {
+                    try {
+                        val inputText = secondConversionInput.text.toString()
+                        val inputVal =
+                            (inputText.toFloat() - 32) * 5 / 9
+                    } catch (e: NumberFormatException) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Please input a number!",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
+            }
+
+            // Celsius,Kelvin
+            29 -> {
+                // set widget titles from values_matrix
+                var temp =
+                    values_matrix[textButton.id][2] + " --> " + values_matrix[textButton.id][3]
+                firstConversionTitle.text = temp
+                temp = " x + 273.15 "
+                firstConversionRatio.text = temp
+
+                temp = values_matrix[textButton.id][3] + " --> " + values_matrix[textButton.id][2]
+                secondConversionTitle.text = temp
+                temp =" x - 273.15 "
+                secondConversionRatio.text = temp
+
+                // Set up any interactions or listeners
+                firstConversionButton.setOnClickListener {
+                    try {
+                        val inputText = firstConversionInput.text.toString()
+                        val inputVal =
+                            inputText.toFloat() + 273.15
+                    } catch (e: NumberFormatException) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Please input a number!",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
+
+                secondConversionButton.setOnClickListener {
+                    try {
+                        val inputText = secondConversionInput.text.toString()
+                        val inputVal =
+                            inputText.toFloat() -273.15
+                    } catch (e: NumberFormatException) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Please input a number!",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
+            }
+
+            // Kelvin,Fahrenheit
+            30 -> {
+                // set widget titles from values_matrix
+                var temp =
+                    values_matrix[textButton.id][2] + " --> " + values_matrix[textButton.id][3]
+                firstConversionTitle.text = temp
+                temp = " (x - 273.15) * 9/5 + 32 "
+                firstConversionRatio.text = temp
+
+                temp = values_matrix[textButton.id][3] + " --> " + values_matrix[textButton.id][2]
+                secondConversionTitle.text = temp
+                temp = " (x - 32) * 5/9 + 273.15 "
+                secondConversionRatio.text = temp
+
+                // Set up any interactions or listeners
+                firstConversionButton.setOnClickListener {
+                    try {
+                        val inputText = firstConversionInput.text.toString()
+                        val inputVal =
+                            (inputText.toFloat() - 273.15) * 9 / 5 + 32
+                    } catch (e: NumberFormatException) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Please input a number!",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
+
+                secondConversionButton.setOnClickListener {
+                    try {
+                        val inputText = secondConversionInput.text.toString()
+                        val inputVal =
+                            (inputText.toFloat() - 32) * 5 / 9 + 273.15
+                    } catch (e: NumberFormatException) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Please input a number!",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
+            }
+
+            // simple multiplication
+            else -> {
+                // set widget titles from values_matrix
+                var temp =
+                    values_matrix[textButton.id][2] + " --> " + values_matrix[textButton.id][3]
+                firstConversionTitle.text = temp
+                temp = "x * " + values_matrix[textButton.id][4]
+                firstConversionRatio.text = temp
+
+                temp = values_matrix[textButton.id][3] + " --> " + values_matrix[textButton.id][2]
+                secondConversionTitle.text = temp
+                temp = "x * " + values_matrix[textButton.id][5]
+                secondConversionRatio.text = temp
+
+                // Set up any interactions or listeners
+                firstConversionButton.setOnClickListener {
+                    try {
+                        val inputText = firstConversionInput.text.toString()
+                        val inputVal =
+                            inputText.toFloat() * values_matrix[textButton.id][4].toFloat()
+                        firstConversionOutput.text = inputVal.toString()
+                    } catch (e: NumberFormatException) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Please input a number!",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
+
+                secondConversionButton.setOnClickListener {
+                    try {
+                        val inputText = secondConversionInput.text.toString()
+                        val inputVal =
+                            inputText.toFloat() * values_matrix[textButton.id][5].toFloat()
+                        secondConversionOutput.text = inputVal.toString()
+                    } catch (e: NumberFormatException) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Please input a number!",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
+            }
+        }
         // Create the PopupWindow
         popupWindow = PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true)
 
-        // Set up any interactions or listeners
-        firstConversionButton.setOnClickListener{
-            try {
-                val inputText = firstConversionInput.text.toString()
-                val inputVal = inputText.toFloat() * values_matrix[textButton.id][4].toFloat()
-                firstConversionOutput.text = inputVal.toString()
-            }catch (e: NumberFormatException){
-                Toast.makeText(requireContext(), "Please input a number!", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        secondConversionButton.setOnClickListener{
-            try {
-                val inputText = secondConversionInput.text.toString()
-                val inputVal = inputText.toFloat() * values_matrix[textButton.id][5].toFloat()
-                secondConversionOutput.text = inputVal.toString()
-            }catch (e: NumberFormatException){
-                Toast.makeText(requireContext(), "Please input a number!", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        // Show the pop-up window at a specific location relative to the textButton
-        popupWindow?.showAsDropDown(textButton)
+        popupWindow?.showAtLocation(popupView, Gravity.CENTER and Gravity.TOP, 0, 0)
     }
-
 }
