@@ -34,13 +34,13 @@
                 android:textAlignment="viewStart"
                 android:textColor="@android:color/black"
                 app:autoSizeTextType="uniform" />
-
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
+        android:contentDescription="@string/hi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="1dp"

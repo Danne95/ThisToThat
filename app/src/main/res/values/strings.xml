@@ -3,4 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_world">hello world</string>
+    <string name="this_tab_is_a_mystery_you_will_never_guess_what_it_will_contain">this tab is a mystery, you will never guess what it will contain</string>
+    <string name="contains_dynamic_rows">contains dynamic rows</string>
+    <string name="hi">Hi</string>
+    <string name="star">star</string>
+    <string name="conversion_button">conversion button</string>
 </resources>

@@ -1,14 +1,11 @@
 package com.example.thistothat
 
-import android.content.Context
-import android.os.Build
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -17,7 +14,6 @@ import android.widget.PopupWindow
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import java.io.InputStream
@@ -28,6 +24,7 @@ private var relativeLayouts = mutableListOf<RelativeLayout>()
 private var values_matrix = mutableListOf<MutableList<String>>()
 
 class Fragment2 : Fragment() {
+    @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val inputStream: InputStream = context?.assets?.open("values.csv")as InputStream
@@ -119,7 +116,7 @@ class Fragment2 : Fragment() {
         popupWindow = null
     }
 
-    fun starButtonInteraction(starButton: ImageButton){
+    private fun starButtonInteraction(starButton: ImageButton){
         when(values_matrix[starButton.id][1].toInt()){
             // favorited
             1 -> {
@@ -128,17 +125,18 @@ class Fragment2 : Fragment() {
                 // change value matrix to unfavorited
                 values_matrix[starButton.id][1] = 0.toString()
                 // change data file to unfavorited
-                val newLine = values_matrix[starButton.id].joinToString(",")
+                //val newLine = values_matrix[starButton.id].joinToString(",")
             }
             else -> {
                 starButton.setImageDrawable(ContextCompat.getDrawable(requireContext(), android.R.drawable.btn_star_big_on))
                 values_matrix[starButton.id][1] = 1.toString()
-                val newLine = values_matrix[starButton.id].joinToString(",")
+                //val newLine = values_matrix[starButton.id].joinToString(",")
             }
         }
 
     }
 
+    @SuppressLint("InflateParams")
     fun textButtonInteraction(textButton: Button){
         val inflater = LayoutInflater.from(requireContext())
         val popupView = inflater.inflate(R.layout.popup_layout, null)
@@ -177,6 +175,7 @@ class Fragment2 : Fragment() {
                         val inputText = firstConversionInput.text.toString()
                         val inputVal =
                             (inputText.toFloat() * 9 / 5) + 32
+                        firstConversionOutput.text = inputVal.toString()
                     } catch (e: NumberFormatException) {
                         Toast.makeText(
                             requireContext(),
@@ -192,6 +191,7 @@ class Fragment2 : Fragment() {
                         val inputText = secondConversionInput.text.toString()
                         val inputVal =
                             (inputText.toFloat() - 32) * 5 / 9
+                        secondConversionOutput.text = inputVal.toString()
                     } catch (e: NumberFormatException) {
                         Toast.makeText(
                             requireContext(),
@@ -223,6 +223,7 @@ class Fragment2 : Fragment() {
                         val inputText = firstConversionInput.text.toString()
                         val inputVal =
                             inputText.toFloat() + 273.15
+                        firstConversionOutput.text = inputVal.toString()
                     } catch (e: NumberFormatException) {
                         Toast.makeText(
                             requireContext(),
@@ -238,6 +239,7 @@ class Fragment2 : Fragment() {
                         val inputText = secondConversionInput.text.toString()
                         val inputVal =
                             inputText.toFloat() -273.15
+                        secondConversionOutput.text = inputVal.toString()
                     } catch (e: NumberFormatException) {
                         Toast.makeText(
                             requireContext(),
@@ -269,6 +271,7 @@ class Fragment2 : Fragment() {
                         val inputText = firstConversionInput.text.toString()
                         val inputVal =
                             (inputText.toFloat() - 273.15) * 9 / 5 + 32
+                        firstConversionOutput.text = inputVal.toString()
                     } catch (e: NumberFormatException) {
                         Toast.makeText(
                             requireContext(),
@@ -284,6 +287,7 @@ class Fragment2 : Fragment() {
                         val inputText = secondConversionInput.text.toString()
                         val inputVal =
                             (inputText.toFloat() - 32) * 5 / 9 + 273.15
+                        secondConversionOutput.text = inputVal.toString()
                     } catch (e: NumberFormatException) {
                         Toast.makeText(
                             requireContext(),

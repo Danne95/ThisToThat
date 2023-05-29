@@ -30,7 +30,7 @@ class Fragment1 : Fragment() {
         return inflater.inflate(R.layout.fragment_page1, container, false)
     }
 
-    companion object {
+    /*companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             Fragment1().apply {
@@ -39,5 +39,5 @@ class Fragment1 : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
-    }
+    }*/
 }
