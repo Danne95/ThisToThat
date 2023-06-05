@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -43,7 +42,7 @@
                 android:inputType="numberDecimal"
                 android:autofillHints=""
                 android:contentDescription="@string/input_conversion_here"
-                tools:ignore="NestedWeights" />
+                tools:ignore="LabelFor,NestedWeights" />
 
             <ImageButton
                 android:id="@+id/convertButton1"
@@ -91,7 +90,8 @@
                 android:ems="10"
                 android:inputType="numberDecimal"
                 android:autofillHints=""
-                android:contentDescription="@string/input_conversion_here" />
+                android:contentDescription="@string/input_conversion_here"
+                tools:ignore="LabelFor" />
 
             <ImageButton
                 android:id="@+id/convertButton2"
@@ -99,7 +99,8 @@
                 android:layout_height="match_parent"
                 android:rotation="180"
                 android:src="?attr/actionModeCloseDrawable"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:contentDescription="@string/click_me" />
 
             <TextView
                 android:id="@+id/convertOutput2"

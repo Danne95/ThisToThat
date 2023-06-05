@@ -5,9 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".Fragment1">
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/this_tab_is_a_mystery_you_will_never_guess_what_it_will_contain" />
+
+
 
 </FrameLayout>
