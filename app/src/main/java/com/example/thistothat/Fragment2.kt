@@ -55,8 +55,8 @@ class Fragment2 : Fragment() {
                 values_matrix.add(fields)
                 parentLayout?.addView(relativeLayout)
 
-                // set buttons from values file
-                when (fields[0].toInt()) {
+                // set star statues from values file
+                /*when (fields[0].toInt()) {
                     1 -> starButton.setImageDrawable(
                         ContextCompat.getDrawable(
                             requireContext(),
@@ -70,7 +70,8 @@ class Fragment2 : Fragment() {
                             android.R.drawable.btn_star_big_off
                         )
                     )
-                }
+                }*/
+
                 val title = fields[2] + " to " + fields[3]
                 textButton.text = title
                 // Set the icon drawable at the end of the button text
@@ -79,19 +80,9 @@ class Fragment2 : Fragment() {
 
                 // set listeners
                 starButton.setOnClickListener {
-                    Toast.makeText(
-                        requireContext(),
-                        "You clicked me, star ID: ${starButton.id}",
-                        Toast.LENGTH_SHORT
-                    ).show()
                     starButtonInteraction(starButton)
                 }
                 textButton.setOnClickListener {
-                    Toast.makeText(
-                        requireContext(),
-                        "You clicked me, text ID: ${textButton.id}",
-                        Toast.LENGTH_SHORT
-                    ).show()
                     textButtonInteraction(textButton)
                 }
             }
