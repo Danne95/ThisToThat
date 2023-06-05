@@ -25,8 +25,8 @@ favorite,id,name_a,name_b,a2b,b2a,class
 0,23,m^2,ft^2,10.7639,0.092903,area
 0,24,m^2,yard^2,1.19599,0.836127,area
 0,25,km^2,acre,247.105,0.00404686,area
-0,26,atmosphere,PSI,14.6959,0.068046,preassure
-0,27,atmosphere,bar,1.01325,0.986923,preassure
+0,26,atmosphere,PSI,14.6959,0.068046,pressure
+0,27,atmosphere,bar,1.01325,0.986923,pressure
 0,28,Celsius,Fahrenheit,0,0,temperature
 0,29,Celsius,Kelvin ,0,0,temperature
 0,30,Kelvin,Fahrenheit ,0,0,temperature

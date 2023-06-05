@@ -1,6 +1,7 @@
 package com.example.thistothat
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -72,6 +73,9 @@ class Fragment2 : Fragment() {
                 }
                 val title = fields[2] + " to " + fields[3]
                 textButton.text = title
+                // Set the icon drawable at the end of the button text
+                val iconImage: Drawable? = conversionClassIcon(fields[6])
+                textButton.setCompoundDrawablesWithIntrinsicBounds(null, null, iconImage, null)
 
                 // set listeners
                 starButton.setOnClickListener {
@@ -114,6 +118,20 @@ class Fragment2 : Fragment() {
         super.onDestroyView()
         popupWindow?.dismiss()
         popupWindow = null
+    }
+
+    private fun conversionClassIcon(conversionClass: String): Drawable? {
+        return when (conversionClass){
+            "acceleration" -> ContextCompat.getDrawable(requireContext(), R.drawable.acceleration)
+            "area" -> ContextCompat.getDrawable(requireContext(), R.drawable.area)
+            "length" -> ContextCompat.getDrawable(requireContext(), R.drawable.length)
+            "mass" -> ContextCompat.getDrawable(requireContext(), R.drawable.mass)
+            "pressure" -> ContextCompat.getDrawable(requireContext(), R.drawable.pressure)
+            "speed" -> ContextCompat.getDrawable(requireContext(), R.drawable.speed)
+            "temperature" -> ContextCompat.getDrawable(requireContext(), R.drawable.temperature)
+            "volume" -> ContextCompat.getDrawable(requireContext(), R.drawable.volume)
+            else -> null
+        }
     }
 
     private fun starButtonInteraction(starButton: ImageButton){
