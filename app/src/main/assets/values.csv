@@ -30,3 +30,4 @@ favorite,id,name_a,name_b,a2b,b2a,class
 0,28,Celsius,Fahrenheit,0,0,temperature
 0,29,Celsius,Kelvin ,0,0,temperature
 0,30,Kelvin,Fahrenheit ,0,0,temperature
+0,31,Centimeter,Inch,0.393701,2.54,length
